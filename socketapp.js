@@ -1,34 +1,17 @@
-function socketapp(server,callback){
+var ledHandler = require('./led-handler');
+var readyBoard = require('./ready-board');
 
+function socketapp(server,callback){
 	var io   = require('socket.io').listen(server);
-	var five = require("johnny-five");
-	var board = new five.Board();
-	
-	//Arduino board connection
-	 board.on("ready", function() {  
-	    console.log('Arduino connected');
-	    led = new five.Led(13);
-	});
- 
-	//Socket connection handler
-	io.on('connection', function (socket) {  
-        console.log(socket.id);
- 
-        socket.on('led:on', function (data) {
-           led.on();
-           console.log('LED ON RECEIVED');
-        });
- 
-        socket.on('led:off', function (data) {
-            led.off();
-            console.log('LED OFF RECEIVED');
- 
-        });
-    });
+
+ 	readyBoard(function(inits){
+ 		io.sockets.on('connection', function (socket) {  
+	        console.log(socket.id);
+	        console.log('Wating for inputs ...');
+	 		ledHandler(socket,inits.led,io.sockets);
+    	});
+ 	});
+
 }
 
-
-	
-	
-
-	module.exports = socketapp;
+module.exports = socketapp;
