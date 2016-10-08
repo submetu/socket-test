@@ -6,3 +6,16 @@ body {
 a {
   color: #00B7FF;
 }
+
+div#buttons{
+	text-align: center;
+	margin: auto;
+}
+.buttons{
+	padding:10px;
+	border:2px solid;
+	margin:20px;
+}
+.buttons:hover{
+	cursor:pointer;
+}

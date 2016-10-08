@@ -1,18 +1,34 @@
 function socketapp(server,callback){
+
 	var io   = require('socket.io').listen(server);
-	var serialport = require('./serialport');
-
-	io.on('connection', function (socket) {
-	  socket.emit('news', { hello: 'world' });
-	  socket.on('my other event', function (data) {
-	    console.log(data);
-	  });
-
-	  socket.on('click-event',function(data){
-	    serialport(data);
-	  });
+	var five = require("johnny-five");
+	var board = new five.Board();
+	
+	//Arduino board connection
+	 board.on("ready", function() {  
+	    console.log('Arduino connected');
+	    led = new five.Led(13);
 	});
+ 
+	//Socket connection handler
+	io.on('connection', function (socket) {  
+        console.log(socket.id);
+ 
+        socket.on('led:on', function (data) {
+           led.on();
+           console.log('LED ON RECEIVED');
+        });
+ 
+        socket.on('led:off', function (data) {
+            led.off();
+            console.log('LED OFF RECEIVED');
+ 
+        });
+    });
 }
 
-module.exports = socketapp;
+
 	
+	
+
+	module.exports = socketapp;

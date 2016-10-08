@@ -1,4 +1,5 @@
 var $button = $('#button');
+var $off    = $('#off');
 var socket = io.connect('http://localhost');
   socket.on('news', function (data) {
     console.log(data);
@@ -6,7 +7,14 @@ var socket = io.connect('http://localhost');
   });
 
 $button.click(function(){
-	socket.emit('click-event',{data : 1});
+	console.log('on button clicked');
+	socket.emit('led:on',{data : 1});
+});
+
+$off.click(function(){
+	
+	socket.emit('led:off',{data : 1});
+	console.log('Off button clicked');
 });
 
 
