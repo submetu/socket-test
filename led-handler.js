@@ -1,11 +1,11 @@
 function ledHandler(socket,led,io){
 	socket.on('led:on', function (data) {
-	   led.fadeIn(2000);
+	   led.brightness(255);
 	   console.log('LED ON RECEIVED');
 	});
 
 	socket.on('led:off', function (data) {
-	    led.fadeOut(500);
+		led.brightness(0);
 	    console.log('LED OFF RECEIVED');
 
 	});
