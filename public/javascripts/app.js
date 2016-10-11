@@ -1,6 +1,10 @@
 var $button = $('#button');
 var $off    = $('#off');
 var $slider = $('#inputSlider');
+var $sliderValue = $('#inputSliderValue');
+var $lightTime = $('#lightTime');
+var $tempField = $('#temperature-field');
+
 var socket = io.connect();
  
 
@@ -24,11 +28,21 @@ $slider.on('change',function(){
 });
 socket.on('led:change',function(data){
 	console.log("the data returned is "+ data.value);
-	$('#inputSlider').val(data.value);
-	$('#inputSliderValue').text(data.value);
+	$slider.val(data.value);
+	$sliderValue.text(data.value);
 	// socket.emit('led:change',{value:data.value});
 });
-
+//when there is a lightChange event fired from the light-handler
+socket.on('led:lightChange',function(data){
+	console.log("the data returned is "+ data.value);
+	$slider.val(data.value);
+	$sliderValue.text(data.value);
+	$lightTime.text(data.time);
+	socket.emit('led:lightChange',{value:data.value});
+});
+socket.on('temperature',function(data){
+	$tempField.text(data.value+" °C");
+});
 
 
 

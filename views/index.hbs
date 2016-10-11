@@ -1,12 +1,21 @@
 
   <h1>{{title}}</h1>
   <p>Welcome to {{title}}</p>
-  
+  <div id ="lightTime">
+    Day or Night - Calculating ..
+  </div>
   <div id = "buttons">
   	<button id ="button" class="buttons">On</button>
   	<button id ="off" class="buttons">Off</button>
-  	<input type="range" id="inputSlider" min="0" max="255" value="0" step="10">
-  	<span id="inputSliderValue"></span>
+    <label for="automatic">Autmoatic Light Detection</label>
+    <input id="automatic" type="checkbox" name="automatic" checked>
+  </div>
+  <div id ="sliders">
+    <input type="range" id="inputSlider" min="0" max="255" value="0" step="10">
+    <span id="inputSliderValue"></span>
+  </div>
+  <div id="temperature">
+    <h3>Temperature:</h3><span id="temperature-field"></span>
   </div>
   
   

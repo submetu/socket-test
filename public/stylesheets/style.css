@@ -7,7 +7,7 @@ a {
   color: #00B7FF;
 }
 
-div#buttons{
+#buttons{
 	text-align: center;
 	margin: auto;
 }
@@ -18,4 +18,20 @@ div#buttons{
 }
 .buttons:hover{
 	cursor:pointer;
+}
+#lightTime{
+	text-align: center;
+	margin: auto;
+	font-size:2em;
+}
+#sliders{
+	margin:auto;
+	text-align: center;
+}
+#temperature h3{
+	display:inline-block;
+}
+#temperature-field{
+	font-size: 1.3em;
+	margin-left:10px;
 }
